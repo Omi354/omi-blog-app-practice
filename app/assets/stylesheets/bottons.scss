@@ -1,0 +1,21 @@
+@use './variables';
+
+.btn-primary {
+  background-color: variables.$primary-color;
+  border: none;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 16px 0;
+  font-weight: bold;
+}
+
+.btn-secondly {
+  background-color: white;
+  border: solid  variables.$primary-color;
+  width: 100%;
+  text-align: center;
+  color: variables.$primary-color;
+  padding: 16px 0;
+  font-weight: bold;
+}
