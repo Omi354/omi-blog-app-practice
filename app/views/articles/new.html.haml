@@ -1,0 +1,11 @@
+.container
+  %h1 新規投稿
+  = form_with model: @article, local: true do |f|
+    %div
+      =f.label :title, "タイトル"
+      =f.text_field :title, class: 'text'
+    %div
+      =f.label :content, "本文"
+      =f.text_area :title
+    %div
+      =f.submit "投稿する", class: 'btn-primary'
