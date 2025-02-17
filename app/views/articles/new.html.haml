@@ -2,10 +2,13 @@
   %h1 新規投稿
   = form_with model: @article, local: true do |f|
     %div
+      =f.label :eye_catch, "アイキャッチ画像"
+      =f.file_field :eye_catch
+    %div
       =f.label :title, "タイトル"
       =f.text_field :title, class: 'text'
     %div
       =f.label :content, "本文"
-      =f.text_area :title
+      =f.text_area :content
     %div
       =f.submit "投稿する", class: 'btn-primary'
