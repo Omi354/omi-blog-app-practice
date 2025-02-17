@@ -1,0 +1,11 @@
+.article
+  %h1.article_title= @article.title
+  .article_detail
+    = image_tag 'default-avatar.png'
+    %div
+      %p= @article.user.display_name
+      %p= formatted_created_at(@article)
+  .article_content
+    = @article.content
+  .article_heart
+    = image_tag 'heart.svg'

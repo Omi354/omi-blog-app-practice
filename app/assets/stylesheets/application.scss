@@ -5,6 +5,7 @@
 @use "./card.scss";
 @use "./header.scss";
 @use "./tabs.scss";
+@use "./article.scss";
 
 html {
   word-spacing: 1px;
@@ -27,6 +28,11 @@ body {
   height: 100%;
   background-color: variables.$base-bg-color;
   font-size: 1em;
+  color: variables.$text-base-color;
+}
+
+a {
+  text-decoration: none;
   color: variables.$text-base-color;
 }
 

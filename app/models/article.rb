@@ -5,4 +5,8 @@ class Article < ApplicationRecord
 
   belongs_to :user
   has_one_attached :eye_catch
+
+  def formats_created_at
+    I18n.l 
+  end
 end
