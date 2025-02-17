@@ -1,0 +1,23 @@
+.container
+  .tabs
+    .tabs_item.active
+      新着記事一覧
+    .tabs_item
+      タイムライン
+
+  - @articles.each do |article|
+    .card
+      .card_image
+        = image_tag 'eyecatch1.png'
+      .card_content
+        .card_title
+          = article.title
+        .card_heart
+          = image_tag 'heart.svg'
+          %span 23
+        .card_detail
+          = image_tag 'default-avatar.png'
+          %div
+            %p sample_user
+            %p 0000/00/00
+

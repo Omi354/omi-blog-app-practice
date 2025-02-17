@@ -21,15 +21,15 @@ john = User.create(
 
 5.times do
   test.articles.create(
-    title: Faker::Lorem.words(number: 5),
-    content: Faker::Lorem.words(number: 80)
+    title: Faker::Lorem.sentence(word_count: 5) ,
+    content: Faker::Lorem.sentence(word_count: 50)
   )
 end
 
 5.times do
   john.articles.create(
-    title: Faker::Lorem.words(number: 5),
-    content: Faker::Lorem.words(number: 80)
+    title: Faker::Lorem.sentence(word_count: 5) ,
+    content: Faker::Lorem.sentence(word_count: 50)
   )
 end
 
