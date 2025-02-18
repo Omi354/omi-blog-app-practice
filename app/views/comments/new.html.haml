@@ -1,0 +1,10 @@
+.container
+  %h1 コメントする
+  = render 'common/error_messages', object: @comment
+
+  = form_with model: @comment, url: article_comments_path(@comment.article), method: :post, local: true do |f|
+    %div
+      =f.label :content, "コメント"
+      =f.text_area :content
+    %div
+      =f.submit "投稿する", class: 'btn-primary'
