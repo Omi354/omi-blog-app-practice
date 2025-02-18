@@ -1,4 +1,6 @@
 %h1= h1_title
+= render 'common/error_messages', object: article
+
 = form_with model: article, local: true do |f|
   %div
     =f.label :eye_catch, "アイキャッチ画像"
