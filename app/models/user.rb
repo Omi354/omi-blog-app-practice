@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :articles, dependent: :destroy
 
   def display_name
-    self.email.split('@').first
+    self.email.split("@").first
   end
 end

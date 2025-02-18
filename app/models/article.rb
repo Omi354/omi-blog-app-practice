@@ -7,6 +7,6 @@ class Article < ApplicationRecord
   has_one_attached :eye_catch
 
   def formats_created_at
-    I18n.l 
+    I18n.l
   end
 end
