@@ -7,7 +7,7 @@
     %div
       %p= @article.user.display_name
       %p= formatted_created_at(@article)
-    - if @article.user == current_user
+    - if written_by_current_user?(@article)
       .article_detail_actions
         .dropdown
           = image_tag 'actions.svg', class: "dropbtn"
