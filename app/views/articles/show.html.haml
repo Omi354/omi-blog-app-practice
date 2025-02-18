@@ -7,6 +7,11 @@
     %div
       %p= @article.user.display_name
       %p= formatted_created_at(@article)
+    .article_detail_actions
+      .dropdown
+        = image_tag 'actions.svg', class: "dropbtn"
+        .dropdown-content.mini
+          = link_to '編集する', edit_article_path(@article)
   .article_content
     = @article.content
   .article_heart
