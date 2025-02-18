@@ -18,3 +18,15 @@
     = @article.content
   .article_heart
     = image_tag 'heart.svg'
+
+.comment
+  -# TODO: Helperメソッドなどでリファクタリング
+  - @comments.each do |comment|
+    .comment_detail
+      %p= comment.user.display_name
+      %p= comment.content
+
+.container
+  = link_to new_article_comment_path(@article) do
+    .btn-secondly
+      コメントする

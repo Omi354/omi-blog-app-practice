@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+    # TODO: 長いのでメソッドとして切りだす
     @comment = current_user.comments.build(comment_params.merge(article_id: params[:article_id]))
     if @comment.save
       flash[:notice] = "コメントしました"
