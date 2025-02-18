@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update ]
 
   def index
     @articles = Article.all
@@ -26,6 +26,17 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = current_user.articles.find(params[:id])
+  end
+
+  def update
+    @article = current_user.articles.find(params[:id])
+    if @article.update(article_params)
+      flash[:notice] = "更新に成功しました"
+      redirect_to article_path(@article)
+    else
+      flash.now[:error] = "更新に失敗しました"
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
