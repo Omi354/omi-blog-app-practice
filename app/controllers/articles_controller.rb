@@ -24,6 +24,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def edit
+    @article = current_user.articles.find(params[:id])
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :content, :eye_catch)
