@@ -1,5 +1,8 @@
 %header.header
-  = link_to 'Blog App', root_path, class: 'header_pageTitle'
+  .header_logo
+    = link_to '#', onclick: 'window.history.back(); return false;' do
+      = image_tag 'back.svg', class: 'header_logo_back'
+    = link_to 'Blog App', root_path, class: 'header_logo_pageTitle'
   .dropdown
     = image_tag 'default-avatar.png', class: 'header_avatar dropbtn'
     .dropdown-content

@@ -1,6 +1,7 @@
 @use './variables';
 
 $avatar-size: 40px;
+$back-arrow-size: 30px;
 $header-padding-y: 16px;
 
 .header {
@@ -10,11 +11,23 @@ $header-padding-y: 16px;
   padding: $header-padding-y 16px;
   font-weight: bold;
 
-  &_pageTitle {
-    color: white;
-    line-height: $avatar-size;
-    font-size: variables.$font-lg;
+  &_logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &_back {
+      width: $back-arrow-size;
+      height: $back-arrow-size;
+    }
+
+    &_pageTitle {
+      color: white;
+      line-height: $avatar-size;
+      font-size: variables.$font-lg;
+    }
   }
+
 
   &_avatar {
     width: $avatar-size;
