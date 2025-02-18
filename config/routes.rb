@@ -3,5 +3,6 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   get "up" => "rails/health#show", as: :rails_health_check
-  root to: "home#index"
+  root to: "articles#index"
+  resources :articles
 end

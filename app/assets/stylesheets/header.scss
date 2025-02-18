@@ -1,0 +1,25 @@
+@use './variables';
+
+$avatar-size: 40px;
+$header-padding-y: 16px;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: variables.$primary-color;
+  padding: $header-padding-y 16px;
+  font-weight: bold;
+
+  &_pageTitle {
+    color: white;
+    line-height: $avatar-size;
+    font-size: variables.$font-lg;
+  }
+
+  &_avatar {
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 100%;
+  }
+}
+

@@ -1,0 +1,20 @@
+.article
+  - if @article.eye_catch.attached?
+    .article_image
+      = image_tag @article.eye_catch
+  %h1.article_title= @article.title
+  .article_detail
+    %div
+      %p= @article.user.display_name
+      %p= formatted_created_at(@article)
+    - if @article.user == current_user
+      .article_detail_actions
+        .dropdown
+          = image_tag 'actions.svg', class: "dropbtn"
+          .dropdown-content.mini
+            = link_to '編集する', edit_article_path(@article)
+            = link_to '削除する', article_path(@article), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
+  .article_content
+    = @article.content
+  .article_heart
+    = image_tag 'heart.svg'
