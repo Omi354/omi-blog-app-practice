@@ -29,6 +29,19 @@ $avatar-size: 32px;
       line-height: $heart-size;
     }
   }
+
+  &_comments {
+    display: flex;
+    p {
+      font-size: 12px;
+    }
+    span {
+      margin-left: 8px;
+      font-size: 12px;
+      color: variables.$primary-color;
+    }
+  }
+
   &_detail {
     padding-top: 12px;
     cursor: pointer;

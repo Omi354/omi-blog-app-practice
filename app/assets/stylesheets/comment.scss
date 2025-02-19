@@ -17,10 +17,17 @@
     display: flex;
     flex-wrap: nowrap; /* 不要な折り返しを防ぐ */
     align-items: center; /* 垂直方向の配置を統一 */
+    justify-content: flex-start;
     gap: 16px; /* 適切な間隔を設定 */
-    & > * {
-      min-width: 50px; /* 各要素が狭くなりすぎないようにする */
-      flex-grow: 1; /* 要素が均等にスペースを取るようにする */
+
+    &_name {
+      flex: 1 1 10%
+    }
+    &_content {
+      flex: 7 5 70%
+    }
+    &_delete {
+      flex: 2 2 20%
     }
   }
 }

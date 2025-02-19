@@ -17,6 +17,9 @@
           .card_heart
             = image_tag 'heart.svg'
             %span 23
+          .card_comments
+            %p comments
+            %span= article.comments.count
           .card_detail
             = image_tag 'default-avatar.png'
             %div

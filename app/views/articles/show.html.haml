@@ -24,10 +24,10 @@
     %h2 コメント
     - @comments.each do |comment|
       .comment_detail
-        %p= comment.user.display_name
-        %p= comment.content
+        %p.comment_detail_name= comment.user.display_name
+        %p.comment_detail_content= comment.content
         - if current_user == comment.user || current_user == @article.user
-          = link_to '削除', article_comment_path(@article, comment), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
+          = link_to '削除', article_comment_path(@article, comment), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'comment_detail_delete'
 
 .container
   = link_to new_article_comment_path(@article) do
