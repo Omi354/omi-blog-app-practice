@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = current_user.comments.build(merged_params)
+    @comment = current_user.comments.build(comment_creation_params)
     if @comment.save
       flash[:notice] = "コメントしました"
       redirect_to article_path(@comment.article)
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content)
   end
 
-  def merged_params
+  def comment_creation_params
     comment_params.merge(article_id: params[:article_id])
   end
 
