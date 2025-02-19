@@ -1,33 +1,20 @@
 .article
-  - if @article.eye_catch.attached?
-    .article_image
-      = image_tag @article.eye_catch
+  = display_eye_catch(@article)
   %h1.article_title= @article.title
   .article_detail
     %div
       %p= @article.user.display_name
       %p= formatted_created_at(@article)
-    - if written_by_current_user?(@article)
-      .article_detail_actions
-        .dropdown
-          = image_tag 'actions.svg', class: "dropbtn"
-          .dropdown-content.mini
-            = link_to '編集する', edit_article_path(@article)
-            = link_to '削除する', article_path(@article), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }
+    = display_article_actions(@article)
   .article_content
     = @article.content
   .article_heart
     = image_tag 'heart.svg'
 - if @comments.present?
   .comment
-    -# TODO: Helperメソッドなどでリファクタリング
     %h2 コメント
     - @comments.each do |comment|
-      .comment_detail
-        %p.comment_detail_name= comment.user.display_name
-        %p.comment_detail_content= comment.content
-        - if current_user == comment.user || current_user == @article.user
-          = link_to '削除', article_comment_path(@article, comment), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'comment_detail_delete'
+      = render 'display_comments', comment: comment, article: @article
 
 .container
   = link_to new_article_comment_path(@article) do
