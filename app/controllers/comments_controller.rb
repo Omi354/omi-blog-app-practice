@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
       flash.now[:error] = "コメントに失敗しました"
       render :new, status: :unprocessable_entity
     end
-
   end
 
   def destroy
@@ -45,5 +44,4 @@ class CommentsController < ApplicationController
       redirect_to article_path(@comment.article)
     end
   end
-
 end
