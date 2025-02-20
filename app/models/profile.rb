@@ -24,7 +24,7 @@ class Profile < ApplicationRecord
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
   validates :nickname, length: { maximum: 10 }
-  validates :nickname, length: { maximum: 500 }
+  validates :introduction, length: { maximum: 500 }
   validates :nickname, uniqueness: true
   validate :valid_birth_day_range
 

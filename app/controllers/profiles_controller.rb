@@ -18,7 +18,6 @@ class ProfilesController < ApplicationController
       flash.now[:error] = "プロフィール作成に失敗しました"
       render :edit, status: :unprocessable_entity
     end
-
   end
 
   private
@@ -29,5 +28,4 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(:nickname, :introduction, :birth_day, :gender, :subscribed, :avatar)
   end
-
 end

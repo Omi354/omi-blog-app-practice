@@ -33,14 +33,14 @@ class User < ApplicationRecord
   end
 
   def display_age
-    self.profile&.birth_day&.present? ? self.age : '?'
+    self.profile&.birth_day&.present? ? self.age : "?"
   end
 
   def display_gender
-    self.profile&.birth_day&.present? ? self.localized_gender : 'unknown'
+    self.profile&.birth_day&.present? ? self.localized_gender : "unknown"
   end
 
   def display_avatar
-    self.profile&.avatar&.attached? ? self.avatar : 'default-avatar.png'
+    self.profile&.avatar&.attached? ? self.avatar : "default-avatar.png"
   end
 end
