@@ -1,14 +1,15 @@
 .container.profilePage
   .profilePage_user
+    -# TODO: リファクタリングする
     .profilePage_user_image
       -if @profile&.avatar&.attached?
         = image_tag @profile.avatar
       - else
         = image_tag 'default-avatar.png'
     .profilePage_user_basicInfo
-      .profilePage_user_name
+      .profilePage_user_detail
         .profilePage_user_displayName
-          = current_user.display_name
+          = "#{current_user.display_name} ( #{current_user.display_age}歳・ #{current_user.display_gender} )"
         .profilePage_user_actionButton
           = link_to 'Edit', edit_profile_path
       .profilePage_user_introduction

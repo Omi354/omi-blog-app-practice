@@ -26,7 +26,17 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one :profile, dependent: :destroy
 
+  delegate :age, :localized_gender, to: :profile, allow_nil: true
+
   def display_name
     self.profile&.nickname || self.email.split("@").first
+  end
+
+  def display_age
+    self.profile&.birth_day&.present? ? self.age : '?'
+  end
+
+  def display_gender
+    self.profile&.birth_day&.present? ? self.localized_gender : 'unknown'
   end
 end
