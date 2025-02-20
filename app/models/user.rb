@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   def display_name
     self.email.split("@").first
