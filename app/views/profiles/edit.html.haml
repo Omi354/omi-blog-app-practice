@@ -17,8 +17,7 @@
       =f.date_field :birth_day
     %div
       =f.label :gender, "性別"
-      -# TODO: リファクタリングする
-      =f.select :gender, Profile.genders.keys.map { |k| [I18n.t("enum.gender.#{k}"), k] }, {}, class: 'text'
+      =f.select :gender, gender_options, {}, class: 'text'
     %div
       =f.label :subscribed, "通知を受け取る"
       =f.check_box :subscribed

@@ -52,5 +52,4 @@ class Profile < ApplicationRecord
   def localized_gender
     I18n.t("enum.gender.#{self.gender}")
   end
-
 end
