@@ -3,10 +3,17 @@ ja:
     models:
       article: 記事
       comment: コメント
+      profile: プロフィール
     attributes:
       article:
         title: タイトル
         content: 本文
       comment:
         content: コメント
-
+      profile:
+        nickname: ニックネーム
+        introduction: 自己紹介
+        birth_day: 誕生日
+        gender: 性別
+        subscribed: 通知許可
+        avatar: アバター
