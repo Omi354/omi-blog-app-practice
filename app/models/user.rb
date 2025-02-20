@@ -24,8 +24,23 @@ class User < ApplicationRecord
 
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_one :profile, dependent: :destroy
+
+  delegate :age, :localized_gender, :avatar, to: :profile, allow_nil: true
 
   def display_name
-    self.email.split("@").first
+    self.profile&.nickname || self.email.split("@").first
+  end
+
+  def display_age
+    self.profile&.birth_day&.present? ? self.age : "?"
+  end
+
+  def display_gender
+    self.profile&.birth_day&.present? ? self.localized_gender : "unknown"
+  end
+
+  def display_avatar
+    self.profile&.avatar&.attached? ? self.avatar : "default-avatar.png"
   end
 end

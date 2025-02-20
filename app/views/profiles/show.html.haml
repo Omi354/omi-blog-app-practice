@@ -1,0 +1,17 @@
+.container.profilePage
+  .profilePage_user
+    .profilePage_user_image
+      = image_tag current_user.display_avatar
+    .profilePage_user_basicInfo
+      .profilePage_user_detail
+        .profilePage_user_displayName
+          = "#{current_user.display_name} ( #{current_user.display_age}歳・ #{current_user.display_gender} )"
+        .profilePage_user_actionButton
+          = link_to 'Edit', edit_profile_path
+      .profilePage_user_introduction
+        = @profile&.introduction
+
+.container
+  %h2 投稿記事一覧
+  - @articles.each do |article|
+    = render "common/display_articles", article: article

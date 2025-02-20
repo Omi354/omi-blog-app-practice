@@ -1,5 +1,6 @@
+@use "./variables";
+
 $heart-size: 32px;
-$avatar-size: 32px;
 
 .article {
   background-color: white;
@@ -19,8 +20,8 @@ $avatar-size: 32px;
     position: relative;
 
     img {
-      width: $avatar-size;
-      height: $avatar-size;
+      width: variables.$avatar-size;
+      height: variables.$avatar-size;
       border-radius: 100%;
       margin-right: 16px;
       cursor: pointer;

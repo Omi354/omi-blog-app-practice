@@ -1,0 +1,26 @@
+.container
+  %h1 プロフィール編集
+  = render 'common/error_messages', object: @profile
+
+  = form_with model: @profile, url:profile_path, method: :put, local: true do |f|
+    %div
+      =f.label :nickname, "アバター画像"
+      =f.file_field :avatar
+    %div
+      =f.label :nickname, "表示名"
+      =f.text_field :nickname, class: 'text'
+    %div
+      =f.label :introduction, "自己紹介"
+      =f.text_area :introduction
+    %div
+      =f.label :birth_day, "誕生日"
+      =f.date_field :birth_day
+    %div
+      =f.label :gender, "性別"
+      =f.select :gender, gender_options, {}, class: 'text'
+    %div
+      =f.label :subscribed, "通知を受け取る"
+      =f.check_box :subscribed
+    %div
+      =f.submit "投稿する", class: 'btn-primary'
+
