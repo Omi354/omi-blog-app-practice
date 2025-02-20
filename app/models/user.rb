@@ -27,6 +27,6 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
 
   def display_name
-    self.email.split("@").first
+    self.profile&.nickname || self.email.split("@").first
   end
 end

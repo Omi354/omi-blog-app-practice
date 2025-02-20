@@ -1,7 +1,7 @@
 .container.profilePage
   .profilePage_user
     .profilePage_user_image
-      = image_tag 'default-avatar.png'
+      = image_tag @profile&.avatar || 'default-avatar.png'
     .profilePage_user_basicInfo
       .profilePage_user_name
         .profilePage_user_displayName
@@ -9,7 +9,7 @@
         .profilePage_user_actionButton
           = link_to 'Edit', edit_profile_path
       .profilePage_user_introduction
-        あああああああああああああああああああああああああああああああああああああああああああああああああああああ
+        = @profile&.introduction
 
 .container
   %h2 投稿記事一覧
