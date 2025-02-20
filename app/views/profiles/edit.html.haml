@@ -2,7 +2,10 @@
   %h1 プロフィール編集
   = render 'common/error_messages', object: @profile
 
-  = form_with model: @profile, url:profile_path, local: true do |f|
+  = form_with model: @profile, url:profile_path, method: :put, local: true do |f|
+    %div
+      =f.label :nickname, "アバター画像"
+      =f.file_field :avatar
     %div
       =f.label :nickname, "表示名"
       =f.text_field :nickname, class: 'text'
@@ -14,21 +17,11 @@
       =f.date_field :birth_day
     %div
       =f.label :gender, "性別"
-      =f.select :gender, [["男性", "male"], ["女性", "female"]], {}, class: 'text'
+      -# TODO: リファクタリングする
+      =f.select :gender, Profile.genders.keys.map { |k| [I18n.t("enum.gender.#{k}"), k] }, {}, class: 'text'
     %div
       =f.label :subscribed, "通知を受け取る"
       =f.check_box :subscribed
     %div
       =f.submit "投稿する", class: 'btn-primary'
 
-
-
--# #  id           :bigint           not null, primary key
--# #  birth_day    :date
--# #  gender       :integer
--# #  introduction :text
--# #  nickname     :string
--# #  subscribed   :boolean
--# #  created_at   :datetime         not null
--# #  updated_at   :datetime         not null
--# #  user_id      :bigint           not null

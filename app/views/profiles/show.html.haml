@@ -1,7 +1,10 @@
 .container.profilePage
   .profilePage_user
     .profilePage_user_image
-      = image_tag @profile&.avatar || 'default-avatar.png'
+      -if @profile&.avatar&.attached?
+        = image_tag @profile.avatar
+      - else
+        = image_tag 'default-avatar.png'
     .profilePage_user_basicInfo
       .profilePage_user_name
         .profilePage_user_displayName

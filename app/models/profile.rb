@@ -21,6 +21,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Profile < ApplicationRecord
+  enum :gender, { male: 0, female: 1, non_binary: 2 }
+
   belongs_to :user
   has_one_attached :avatar
 end
