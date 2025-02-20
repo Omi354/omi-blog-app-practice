@@ -1,3 +1,5 @@
+@use "./variables";
+
 .comment {
   background-color: white;
   margin: 16px;
@@ -20,14 +22,27 @@
     justify-content: flex-start;
     gap: 16px; /* 適切な間隔を設定 */
 
+    &_user {
+      display: flex;
+
+      img {
+        width: variables.$avatar-size;
+        height: variables.$avatar-size;
+        border-radius: 100%;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+    }
+
     &_name {
-      flex: 1 1 10%
+      flex: 1 1 10%;
+      line-height: variables.$avatar-size;
     }
     &_content {
-      flex: 7 5 70%
+      flex: 7 5 70%;
     }
     &_delete {
-      flex: 2 2 20%
+      flex: 2 2 20%;
     }
   }
 }

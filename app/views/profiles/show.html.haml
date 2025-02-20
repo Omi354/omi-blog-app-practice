@@ -2,10 +2,7 @@
   .profilePage_user
     -# TODO: リファクタリングする
     .profilePage_user_image
-      -if @profile&.avatar&.attached?
-        = image_tag @profile.avatar
-      - else
-        = image_tag 'default-avatar.png'
+      = image_tag current_user.display_avatar
     .profilePage_user_basicInfo
       .profilePage_user_detail
         .profilePage_user_displayName

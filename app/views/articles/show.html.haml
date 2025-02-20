@@ -2,6 +2,7 @@
   = display_eye_catch(@article)
   %h1.article_title= @article.title
   .article_detail
+    = image_tag @article.user.display_avatar
     %div
       %p= @article.user.display_name
       %p= formatted_created_at(@article)
