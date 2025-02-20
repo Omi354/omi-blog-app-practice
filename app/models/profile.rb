@@ -23,6 +23,19 @@
 class Profile < ApplicationRecord
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
+  validates :nickname, length: { maximum: 10 }
+  validates :nickname, uniqueness: true
+  validate :valid_birth_date_range
+
   belongs_to :user
   has_one_attached :avatar
+
+  def valid_birth_date_range
+    return unless self.birth_day.present?
+    if self.birth_day > Date.today
+      errors.add(:birth_day, "は未来の日付を指定できません")
+    elsif birth_day < 100.years.ago.to_date
+      errors.add(:birth_day, "は100歳未満である必要があります")
+    end
+  end
 end
