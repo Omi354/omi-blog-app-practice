@@ -6,4 +6,8 @@ class ProfilesController < ApplicationController
     @articles = current_user.articles.order(created_at: :desc)
   end
 
+  def edit
+    @profile = current_user.build_profile
+  end
+
 end
