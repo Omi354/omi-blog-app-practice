@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   root to: "articles#index"
   resources :articles do
     resources :comments, only: [ :new, :create, :destroy ]
+    resource :likes, only: [ :create, :destroy ]
   end
 
+  get "favorites", to: "favorites#index"
   resource :profile, only: [ :show, :edit, :update ]
 end

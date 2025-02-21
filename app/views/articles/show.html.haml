@@ -9,8 +9,14 @@
     = display_article_actions(@article)
   .article_content
     = @article.content
-  .article_heart
-    = image_tag 'heart.svg'
+  - if user_signed_in?
+    .article_heart
+      - if current_user.favorites.exists?(@article.id)
+        = link_to article_likes_path(@article), data: { turbo_method: :delete } do
+          = image_tag 'heart-active.svg'
+      - else
+        = link_to article_likes_path(@article), data: { turbo_method: :post } do
+          = image_tag 'heart.svg'
 - if @comments.present?
   .comment
     %h2 コメント

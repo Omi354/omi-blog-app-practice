@@ -1,0 +1,6 @@
+.container
+  %h1.favorites_title お気に入り記事一覧
+
+  .articles
+    - @articles.each do |article|
+      = render partial: 'common/display_articles', locals: { article: article }
