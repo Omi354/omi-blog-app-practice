@@ -3,14 +3,16 @@ class LikesController < ApplicationController
 
   def create
     like = current_user.likes.build(article_id: @article.id)
-    like.save
+    like.save!
+    flash[:notice] = "いいねしました"
     redirect_to article_path(@article)
   end
 
   def destroy
     like = current_user.likes.find_by(article_id: @article.id)
-    like.destroy
-    redirect_to article_path(@article)
+    like.destroy!
+    flash[:notice] = "いいねを取り消しました"
+    redirect_to article_path(@article), status: :see_other
   end
 
   private

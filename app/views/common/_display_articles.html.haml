@@ -8,7 +8,7 @@
         = article.title
       .card_heart
         = image_tag 'heart.svg'
-        %span 23
+        %span= article.likes.count
       .card_comments
         %p comments
         %span= article.comments.count

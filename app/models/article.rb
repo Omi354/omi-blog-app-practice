@@ -31,8 +31,4 @@ class Article < ApplicationRecord
   def formats_created_at
     I18n.l
   end
-
-  def liked_by?(user)
-    likes.where(user_id: user.id).exists?
-  end
 end

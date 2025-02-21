@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resource :likes, only: [:create, :destroy]
   end
 
-  get 'liked_articles', to: 'articles#liked_articles'
+  get 'favorites', to: 'favorites#index'
   resource :profile, only: [ :show, :edit, :update ]
 end
