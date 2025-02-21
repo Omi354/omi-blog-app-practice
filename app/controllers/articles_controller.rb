@@ -45,6 +45,10 @@ class ArticlesController < ApplicationController
     redirect_to articles_path, status: :see_other
   end
 
+  def liked_articles
+    @articles = current_user.liked_articles
+  end
+
   private
   def article_params
     params.require(:article).permit(:title, :content, :eye_catch)
