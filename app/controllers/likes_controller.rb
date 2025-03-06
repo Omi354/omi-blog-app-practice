@@ -9,9 +9,11 @@ class LikesController < ApplicationController
 
   def create
     like = current_user.likes.build(article_id: @article.id)
-    like.save!
-    flash[:notice] = "いいねしました"
-    redirect_to article_path(@article)
+    if like.save!
+      render json: { status: 'ok' }
+    else
+      render json: { status: 'ng', message: 'いいねに失敗しました' }
+    end
   end
 
   def destroy

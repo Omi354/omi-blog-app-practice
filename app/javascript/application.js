@@ -3,11 +3,15 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import jquery from "jquery"
 import "axios"
+
 window.$ = jquery
+
+const csrfToken = document.getElementsByName('csrf-token')[0].content
+axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
 
 document.addEventListener('turbo:load', function() {
   const articleId = $('.article').data('article-id')
-  
+
   axios.get(`/articles/${articleId}/likes`)
     .then(response => {
       if (response.data.hasLike) {
@@ -20,6 +24,23 @@ document.addEventListener('turbo:load', function() {
       console.log(error)
     })
 
+  // ハートマークを押したらpostRequestをおくる
+  // statusがOKならハートマークのhiddenクラスをかえる
+
+  $('.article_heart-inactive').on('click', () => {
+    axios.post(`/articles/${articleId}/likes`)
+      .then(response => {
+        if (response.data.status) {
+          $('.article_heart-active').removeClass('hidden')
+          $('.article_heart-inactive').addClass('hidden')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        alert(error.response.data.message)
+      })
+
+  })
 
 })
 
