@@ -2,9 +2,7 @@ import $ from "jquery"
 import axios from "lib/axios"
 
 
-export function setupLikeButton() {
-  const articleId = $('.article').data('article-id')
-
+const fetchLikeStatus = (articleId) => {
   axios.get(`/articles/${articleId}/likes`)
     .then(response => {
       if (response.data.hasLike) {
@@ -16,7 +14,9 @@ export function setupLikeButton() {
     .catch(error => {
       console.log(error)
     })
+}
 
+const addLike = (articleId) => {
   $('.article_heart-inactive').on('click', () => {
     axios.post(`/articles/${articleId}/likes`)
       .then(response => {
@@ -29,9 +29,10 @@ export function setupLikeButton() {
         console.log(error)
         alert(error.response.data.message)
       })
-
   })
+}
 
+const removeLike = (articleId) => {
   $('.article_heart-active').on('click', () => {
     axios.delete(`/articles/${articleId}/likes`)
       .then(response => {
@@ -45,6 +46,12 @@ export function setupLikeButton() {
         alert(error.response.data.message)
       })
   })
+}
 
+export function setupLikeButton() {
+  const articleId = $('.article').data('article-id')
+  fetchLikeStatus(articleId)
+  addLike(articleId)
+  removeLike(articleId)
 }
 
