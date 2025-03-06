@@ -1,14 +1,15 @@
-import $ from "jquery"
+import jquery from "jquery"
 import axios from "lib/axios"
 
+window.$ = jquery
 
-const fetchLikeStatus = (articleId) => {
+const fetchLikeStatus = (articleId, heartActive, heartInactive) => {
   axios.get(`/articles/${articleId}/likes`)
     .then(response => {
       if (response.data.hasLike) {
-        $('.article_heart-active').removeClass('hidden')
+        heartActive.classList.remove("hidden")
       } else {
-        $('.article_heart-inactive').removeClass('hidden')
+        heartInactive.classList.remove("hidden")
       }
     })
     .catch(error => {
@@ -48,9 +49,14 @@ const removeLike = (articleId) => {
   })
 }
 
-export function setupLikeButton() {
-  const articleId = $('.article').data('article-id')
-  fetchLikeStatus(articleId)
+export function setupLikeButton(articleElement) {
+  if (!articleElement) return
+
+  const articleId = articleElement.dataset.articleId
+  const heartActive = articleElement.querySelector(".article_heart-active");
+  const heartInactive = articleElement.querySelector(".article_heart-inactive");
+
+  fetchLikeStatus(articleId, heartActive, heartInactive)
   addLike(articleId)
   removeLike(articleId)
 }
