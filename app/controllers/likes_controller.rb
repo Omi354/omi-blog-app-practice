@@ -10,21 +10,21 @@ class LikesController < ApplicationController
   def create
     like = current_user.likes.build(article_id: @article.id)
     if like.save
-      render json: { status: 'ok' }
+      render json: { status: "ok" }
     else
-      render json: { status: 'ng', message: 'いいねに失敗しました' }, status: :unprocessable_entity
+      render json: { status: "ng", message: "いいねに失敗しました" }, status: :unprocessable_entity
     end
   end
 
   def destroy
     like = current_user.likes.find_by(article_id: @article.id)
-    
+
     if like.nil?
-      render json: { status: 'ng', message: 'いいねが見つかりません' }, status: :not_found
+      render json: { status: "ng", message: "いいねが見つかりません" }, status: :not_found
     elsif like.destroy
-      render json: { status: 'ok' }
+      render json: { status: "ok" }
     else
-      render json: { status: 'ng', message: 'いいね削除に失敗しました' }, status: :unprocessable_entity
+      render json: { status: "ng", message: "いいね削除に失敗しました" }, status: :unprocessable_entity
     end
   end
 
