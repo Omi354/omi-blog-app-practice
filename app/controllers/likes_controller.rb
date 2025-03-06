@@ -2,6 +2,11 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article
 
+  def show
+    has_like =  current_user.favorites.exists?(@article.id)
+    render json: { hasLike: has_like }
+  end
+
   def create
     like = current_user.likes.build(article_id: @article.id)
     like.save!

@@ -5,49 +5,21 @@ import jquery from "jquery"
 import "axios"
 window.$ = jquery
 
-
-// Turbo Driveのロードイベントで実行される関数
 document.addEventListener('turbo:load', function() {
-  console.log('Page loaded with Turbo Drive');
-  $('.article_title').click(() => {
-    alert("clicked")
-  })
-
-  // axiosを使ったGETリクエストのサンプル
-  console.log('Sending test axios GET request...');
-  axios.get('/articles')
+  const articleId = $('.article').data('article-id')
+  
+  axios.get(`/articles/${articleId}/likes`)
     .then(response => {
-      console.log('Axios request successful');
-      console.log('Data received:', response.data);
-      
-      // データを使って何か処理をする例
-      const articleCount = response.data.length || 0;
-      console.log(`Found ${articleCount} articles`);
-      
-      // 取得したデータをUIに表示する例
-      $('#axios-response-container').html(`<p>Loaded ${articleCount} articles via axios</p>`);
+      if (response.data.hasLike) {
+        $('.article_heart-active').removeClass('hidden')
+      } else {
+        $('.article_heart-inactive').removeClass('hidden')
+      }
     })
     .catch(error => {
-      console.error('Axios request failed:', error);
-      $('#axios-response-container').html('<p class="text-danger">Failed to load data</p>');
+      console.log(error)
     })
-    .finally(() => {
-      console.log('Axios request completed');
-    });
-  
-  // ここに初期化コードやページ読み込み時に実行したいコードを記述します
-  // 例：
-  // $('.some-element').on('click', function() {
-  //   console.log('Element clicked!');
-  // });
-  
-  // Ajaxリクエストの例
-  // axios.get('/api/data')
-  //   .then(response => {
-  //     console.log('Data loaded:', response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error('Error loading data:', error);
-  //   });
-});
+
+
+})
 

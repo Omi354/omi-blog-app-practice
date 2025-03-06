@@ -37,7 +37,8 @@ $heart-size: 32px;
     padding: 24px 0 32px;
   }
 
-  &_heart {
+  &_heart-active,
+  &_heart-inactive {
     position: absolute;
     right: 16px;
     bottom: 16px;
