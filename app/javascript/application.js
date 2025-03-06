@@ -42,5 +42,22 @@ document.addEventListener('turbo:load', function() {
 
   })
 
+  // ハートマークを押したらdeleteRequestをおくる
+  // statusがOKならハートマークのhiddenクラスを変える
+  $('.article_heart-active').on('click', () => {
+    axios.delete(`/articles/${articleId}/likes`)
+      .then(response => {
+        if (response.data.status) {
+          $('.article_heart-active').addClass('hidden')
+          $('.article_heart-inactive').removeClass('hidden')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        alert(error.response.data.message)
+      })
+
+  })
+
 })
 
