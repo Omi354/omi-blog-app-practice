@@ -1,4 +1,4 @@
-.article
+.article{data: {article_id: @article.id}}
   = display_eye_catch(@article)
   %h1.article_title= @article.title
   .article_detail
@@ -10,13 +10,11 @@
   .article_content
     = @article.content
   - if user_signed_in?
-    .article_heart
-      - if current_user.favorites.exists?(@article.id)
-        = link_to article_likes_path(@article), data: { turbo_method: :delete } do
-          = image_tag 'heart-active.svg'
-      - else
-        = link_to article_likes_path(@article), data: { turbo_method: :post } do
-          = image_tag 'heart.svg'
+    .article_heart-active.hidden
+      = image_tag 'heart-active.svg'
+    .article_heart-inactive.hidden
+      = image_tag 'heart.svg'
+
 - if @comments.present?
   .comment
     %h2 コメント
@@ -27,3 +25,5 @@
   = link_to new_article_comment_path(@article) do
     .btn-secondly
       コメントする
+
+= javascript_import_module_tag "entrypoints/articles"
