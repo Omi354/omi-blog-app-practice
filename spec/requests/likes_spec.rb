@@ -10,25 +10,29 @@ RSpec.describe "Likes", type: :request do
        post user_session_path, params: { user: { email: user.email, password: 'password' } }
       end
 
-      it "いいねされ、リダイレクトされる" do
+      it "いいねされる" do
         expect {
           post article_likes_path(article_id: article.id)
         }.to change(Like, :count).by(1)
-        expect(response).to have_http_status(302)
-        expect(response).to redirect_to(article_path(article))
+        expect(response).to have_http_status(200)
+        expect(JSON.parse(response.body)['status']).to eq 'ok'
 
         like = Like.last
         expect(like.user).to eq(user)
         expect(like.article).to eq(article)
       end
 
-      it "同じ記事に2回目のいいねはできない" do
-        post article_likes_path(article_id: article.id)
+      context "すでに記事にいいねしている場合" do
+        let!(:like) { create(:like, user: user, article: article) }
 
-        # 2回目のいいねは件数が増えないことを確認
-        expect {
-          post article_likes_path(article_id: article.id)
-        }.not_to change(Like, :count)
+        it "2回目のいいねはできない" do
+          expect {
+            post article_likes_path(article_id: article.id)
+          }.not_to change(Like, :count)
+          expect(response).to have_http_status(422)
+          expect(JSON.parse(response.body)['status']).to eq 'ng'
+          expect(JSON.parse(response.body)['message']).to eq 'いいねに失敗しました'
+        end
       end
     end
 
@@ -39,4 +43,43 @@ RSpec.describe "Likes", type: :request do
       end
     end
   end
+
+  describe "DELETE /articles/:article_id/likes" do
+    context "ログインしている場合" do
+      before do
+        post user_session_path, params: { user: { email: user.email, password: 'password' } }
+      end
+
+      context "いいねが存在する場合" do
+        let!(:like) { create(:like, user: user, article: article) }
+
+        it "いいねが削除される" do
+          expect {
+            delete article_likes_path(article_id: article.id)
+          }.to change(Like, :count).by(-1)
+          expect(response).to have_http_status(200)
+          expect(JSON.parse(response.body)['status']).to eq 'ok'
+        end
+      end
+
+      context "いいねが存在しない場合" do
+        it "エラーが返される" do
+          expect {
+            delete article_likes_path(article_id: article.id)
+          }.not_to change(Like, :count)
+          expect(response).to have_http_status(404)
+          expect(JSON.parse(response.body)['status']).to eq 'ng'
+          expect(JSON.parse(response.body)['message']).to eq 'いいねが見つかりません'
+        end
+      end
+    end
+
+    context "ログインしていない場合" do
+      it "サインイン画面にリダイレクトされる" do
+        delete article_likes_path(article_id: article.id)
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
 end
