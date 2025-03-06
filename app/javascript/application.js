@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import jquery from "jquery"
-import "axios"
+import axios from "lib/axios"
 
 window.$ = jquery
 
@@ -24,9 +24,6 @@ document.addEventListener('turbo:load', function() {
       console.log(error)
     })
 
-  // ハートマークを押したらpostRequestをおくる
-  // statusがOKならハートマークのhiddenクラスをかえる
-
   $('.article_heart-inactive').on('click', () => {
     axios.post(`/articles/${articleId}/likes`)
       .then(response => {
@@ -42,8 +39,6 @@ document.addEventListener('turbo:load', function() {
 
   })
 
-  // ハートマークを押したらdeleteRequestをおくる
-  // statusがOKならハートマークのhiddenクラスを変える
   $('.article_heart-active').on('click', () => {
     axios.delete(`/articles/${articleId}/likes`)
       .then(response => {
@@ -56,8 +51,5 @@ document.addEventListener('turbo:load', function() {
         console.log(error)
         alert(error.response.data.message)
       })
-
   })
-
 })
-
